@@ -19,6 +19,9 @@ public class Model {
 	private List<Country> countries ;
 	private Map<Integer, Country> countryMap ;
 	
+	// risultati simulazione
+	List<CountryAndNum> stanziali ;
+	
 	public Model() {
 		
 	}
@@ -69,6 +72,24 @@ public class Model {
 			System.out.format("%s: %d\n", cn.getCountry(), cn.getNum()) ;
 		}
 		
+	}
+
+	public int simula(Country partenza) {
+		
+		Simulatore sim = new Simulatore(this.graph) ;
+		
+		sim.inserisci(partenza);
+		
+		sim.run() ;
+		
+		this.stanziali = sim.getPresenti() ;
+		
+		return sim.getPassi() ;
+		
+	}
+
+	public List<CountryAndNum> getStanziali() {
+		return this.stanziali;
 	}
 	
 }
