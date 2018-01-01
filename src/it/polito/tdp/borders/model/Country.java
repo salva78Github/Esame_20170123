@@ -13,11 +13,13 @@ package it.polito.tdp.borders.model;
  * @author Fulvio
  *
  */
-public class Country {
+public class Country implements Comparable<Country>{
 
 	private int cCode ; // Country Code for the state
 	private String stateAbb ; // State Abbreviation (3 capital letters)
 	private String stateName ; // Full State name
+	private int numeroDiStatiConfinanti;
+	private int peopleNumber;
 	
 	/**
 	 * Initialize a new {@link Country} object, with full parameters.
@@ -108,7 +110,42 @@ public class Country {
 	 */
 	@Override
 	public String toString() {
-		return String.format("[%s=%s]", stateAbb, stateName);
+		return String.format("[%s=%s - num. stati conf.=%d]", stateAbb, stateName, getNumeroDiStatiConfinanti());
+	}
+
+	/**
+	 * @return the numeroDiStatiConfinanti
+	 */
+	public int getNumeroDiStatiConfinanti() {
+		return numeroDiStatiConfinanti;
+	}
+
+	/**
+	 * @param numeroDiStatiConfinanti the numeroDiStatiConfinanti to set
+	 */
+	public void setNumeroDiStatiConfinanti(int numeroDiStatiConfinanti) {
+		this.numeroDiStatiConfinanti = numeroDiStatiConfinanti;
+	}
+
+	@Override
+	public int compareTo(Country arg0) {
+		// TODO Auto-generated method stub
+		return arg0.getNumeroDiStatiConfinanti()-this.getNumeroDiStatiConfinanti();
+	}
+
+	public void setPeopleNumber(Integer peopleNumber) {
+		this.peopleNumber = peopleNumber;
+	}
+
+	/**
+	 * @return the peopleNumber
+	 */
+	public int getPeopleNumber() {
+		return peopleNumber;
+	}
+
+	public String toString4Statistics() {
+		return String.format("[%s=%s]  --> %d", stateAbb, stateName, getPeopleNumber());
 	}
 	
 	
